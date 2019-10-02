@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: Customer Profile API
+  description: This is an API to allow customers to manage their profiles end to end.(i.e.
+    CREATE, UPDATE and DELETE).
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/udaragunasekara9/crm-api-design/1.0.0
+  description: SwaggerHub API Auto Mocking
+security:
+- oAuth2AuthCode:
+  - profile.read
+  - profile.create
+  - profile.update
+  - profile.delete
+paths:
+  /customers/profiles:
+    post:
+      tags:
+      - customers
+      summary: Creates a Customer profile
+      description: Creates the customer's profile from the data posted in the body.
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerProfileBody'
+      responses:
+        201:
+          description: a customer profile to be returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfile'
+        400:
+          description: Bad request
+        403:
+          description: Not authorized to perform the action
+        503:
+          description: Service unavailable
+      security:
+      - oAuth2AuthCode:
+        - profile.create
+  /customers/profiles/{id}:
+    get:
+      tags:
+      - customers
+      summary: Returns a customer profile by ID
+      description: Returns the customer's profile data identified by the customer
+        id
+      parameters:
+      - name: id
+        in: path
+        description: ID of the customer to get
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: a customer profile to be returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfile'
+        403:
+          description: Not authorized to perform the action
+        404:
+          description: Requested resource not found
+        503:
+          description: Service unavailable
+    put:
+      tags:
+      - customers
+      summary: Updates a Customer profile
+      description: Updates the customer's profile from the data posted in the body.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the customer to update
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/CustomerProfileBody'
+      responses:
+        201:
+          description: updated customer profile to be returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProfileResponseData'
+        400:
+          description: Bad request
+        403:
+          description: Not authorized to perform the action
+        404:
+          description: Requested resource not found
+        503:
+          description: Service unavailable
+      security:
+      - oAuth2AuthCode:
+        - profile.update
+    delete:
+      tags:
+      - customers
+      summary: Deletes the customer profile
+      description: Deletes the customer profile idenfied by the id.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the customer to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+        503:
+          description: Service unavailable
+      security:
+      - oAuth2AuthCode:
+        - profile.delete
+components:
+  schemas:
+    CustomerProfile:
+      required:
+      - first_name
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        email:
+          type: string
+          format: email
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressData'
+    CustomerProfileResponseData:
+      allOf:
+      - $ref: '#/components/schemas/CustomerProfile'
+      - required:
+        - id
+        type: object
+        properties:
+          id:
+            type: string
+    AddressData:
+      type: object
+      properties:
+        address_type:
+          type: string
+          enum:
+          - BILLING
+          - RESIDENTIAL
+          - BUSINESS
+        address1:
+          type: string
+        address2:
+          type: string
+        suburb:
+          type: string
+        postcode:
+          type: integer
+        state:
+          type: string
+          enum:
+          - ACT
+          - NSW
+          - VIC
+          - QLD
+          - SA
+          - TAS
+  responses:
+    CustomerProfileResponse:
+      description: A JSON object containing customer profile information including
+        the id
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerProfileResponseData'
+  requestBodies:
+    CustomerProfileBody:
+      description: A JSON object containing customer profile information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerProfile'
+      required: true
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: Use OAuth2 authorization grant flow
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth/authorize
+          tokenUrl: /oauth/token
+          scopes:
+            profile.read: Read Customer profile
+            profile.create: Create Customer profile
+            profile.update: Update Customer profile
+            profile.delete: Delete Customer profile
