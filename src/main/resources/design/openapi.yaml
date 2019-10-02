@@ -5,8 +5,10 @@ info:
     CREATE, UPDATE and DELETE).
   version: 1.0.0
 servers:
-- url: https://virtserver.swaggerhub.com/udaragunasekara9/crm-api-design/1.0.0
-  description: SwaggerHub API Auto Mocking
+# Added by API Auto Mocking Plugin
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/udaragunasekara9/crm-api-design/1.0.0
+
 security:
 - oAuth2AuthCode:
   - profile.read
@@ -24,11 +26,7 @@ paths:
         $ref: '#/components/requestBodies/CustomerProfileBody'
       responses:
         201:
-          description: a customer profile to be returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomerProfile'
+          $ref: '#/components/responses/CustomerProfileResponse'
         400:
           description: Bad request
         403:
@@ -56,11 +54,7 @@ paths:
           type: string
       responses:
         200:
-          description: a customer profile to be returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomerProfile'
+          $ref: '#/components/responses/CustomerProfileResponse'
         403:
           description: Not authorized to perform the action
         404:
@@ -85,11 +79,7 @@ paths:
         $ref: '#/components/requestBodies/CustomerProfileBody'
       responses:
         201:
-          description: updated customer profile to be returned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomerProfileResponseData'
+          $ref: '#/components/responses/CustomerProfileResponse'
         400:
           description: Bad request
         403:

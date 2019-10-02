@@ -1,4 +1,6 @@
-# Contract First Api design demonstration
+# Wrapper REST Service for Legacy CRM application
+
+This microservice provides a REST interface for a legacy CRM application that doesn't support REST. It is assumed the legacy system has soap apis. This service translates REST api calls that will be forwarded through the api gateway to SOAP messages that can be understood by the legacy system.
 
 1. Api design is done in swagger-hub and can be found in the following url
 

@@ -23,27 +23,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-	@Autowired
-	private UserDetailsService jwtUserDetailsService;
+//	@Autowired
+//	private UserDetailsService jwtUserDetailsService;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+		super.configure(auth);
 	}
+//
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+//	@Bean
+//	@Override
+//	public AuthenticationManager authenticationManagerBean() throws Exception {
+//		return super.authenticationManagerBean();
+//	}
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {

@@ -1,4 +1,4 @@
-package com.ug.crm.crmwrapperservice;
+package com.ug.crm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

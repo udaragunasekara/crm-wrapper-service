@@ -1,4 +1,4 @@
-package com.ug.crm.model;
+package com.ug.crm.model.json;
 
 import java.io.Serializable;
 import java.util.Objects;

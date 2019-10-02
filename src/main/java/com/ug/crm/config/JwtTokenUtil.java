@@ -49,7 +49,7 @@ public class JwtTokenUtil {
 		return buildToken(claims, userDetails.getUsername());
 	}
 
-	private String buildToken(Map<String, Object> claims, String subject) {
+	public String buildToken(Map<String, Object> claims, String subject) {
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + jwtValiditySeconds * 1000))
 				.signWith(SignatureAlgorithm.HS512, secret).compact();

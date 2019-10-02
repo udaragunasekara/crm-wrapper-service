@@ -1,4 +1,4 @@
-package com.ug.crm.model;
+package com.ug.crm.model.json;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
