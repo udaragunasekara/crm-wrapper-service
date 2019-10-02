@@ -10,7 +10,7 @@ The exported open api schema definition can be found in the /resources/design/op
 
 There is an api gateway sitting in front of the crm wrapper microservice which encapsulate any transformation logic to communicate with the legacy crm application. 
 
-![alt text] (https://github.com/udaragunasekara/crm-wrapper-service/edit/master/src/main/resources/design/high-level-design.png)
+[[https://github.com/udaragunasekara/crm-wrapper-service/edit/master/src/main/resources/design/high-level-design.png]]
 
 3. For securing the application JWT token based security is suggested. Microservice will use the JWT token to authenticate and authorise requests. 
 All requests coming from the api gateway should carry the 'Authorize' header with the 'Bearer' jwt token. Client applications can obtain the jwt token via the OAuth2 Authorization 
