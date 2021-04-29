@@ -72,7 +72,7 @@
 		<dependency>
 			<groupId>org.openapitools</groupId>
 			<artifactId>openapi-generator-maven-plugin</artifactId>
-			<version>3.3.4</version>
+			<version>5.1.0</version>
 		</dependency>
 
 		<dependency>
@@ -125,7 +125,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<!-- <plugin> <groupId>org.openapitools</groupId> <artifactId>openapi-generator-maven-plugin</artifactId> 
-				<version>3.3.4</version> <executions> <execution> <goals> <goal>generate</goal> 
+				<version>5.1.0</version> <executions> <execution> <goals> <goal>generate</goal> 
 				</goals> <configuration> <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec> 
 				<generatorName>java</generatorName> <configOptions> <sourceFolder>src/gen/java/main</sourceFolder> 
 				</configOptions> </configuration> </execution> </executions> </plugin> -->
